@@ -79,7 +79,7 @@ const StyledInput = styled.input`
 `
 
 const EndOfMessagesForAutoScroll = styled.div`
- margin-bottom: 30px;
+    margin-bottom: 30px;
 `
 
 const ConversationScreen = ({conversation, messages}: {conversation: Conversation; messages: IMessage[]}) => {
@@ -94,6 +94,7 @@ const ConversationScreen = ({conversation, messages}: {conversation: Conversatio
     const showMessages = () => {
         // if front-end is loading messages behind the scences. display messages retrieved from Next SSR (passed down from [id].tsx)
         if(messagesLoading) {
+            scrollToBottom()
             return messages.map((message) => (
                 // <p key={index}>{JSON.stringify(message)}</p>
                 <Message key={message.id} message={message} />
@@ -136,7 +137,7 @@ const ConversationScreen = ({conversation, messages}: {conversation: Conversatio
     }
     const endOfMessageRef = useRef<HTMLDivElement>(null)
     const scrollToBottom = () => {
-        endOfMessageRef.current?.scrollIntoView({behavior: "smooth"})
+        endOfMessageRef.current?.scrollIntoView()
     }
     return (
         <>
